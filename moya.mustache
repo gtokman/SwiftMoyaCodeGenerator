@@ -1,3 +1,5 @@
+// This file was generated using Moya Generator for Paw. 
+
 import Moya
 
 public enum API {
@@ -6,7 +8,7 @@ public enum API {
 
 extension API: TargetType {
 
-    public var baseURL: NSURL { return NSURL(string: "{{{baseURL}}}")! }
+    public var baseURL: URL { return URL(string: "{{{baseURL}}}")! }
 
     public var path: String {
         switch self {
@@ -19,7 +21,7 @@ extension API: TargetType {
         return .{{{request.method}}}
     }
 
-    public var parameters: [String: AnyObject]? {
+    public var parameters: [String: String]? {
         switch self {
         {{#queryParams}}
         case .{{{request.name}}}({{{queryParams}}}):
@@ -38,20 +40,10 @@ extension API: TargetType {
         }
     }
 
-    // TODO: Provide proper sampleData!
-    // Currently PAW API does not support Response access,
-    // so it was not possible to do it automatically.
-    public var sampleData: NSData {
+    public var sampleData: Data {
         switch self {
         case .{{{request.name}}}:
-            return "To be implemented...".dataUsingEncoding(NSUTF8StringEncoding)!
+            return "To be implemented...".data(using: .utf8)
         }
-    }
-}
-
-// See https://github.com/Moya/Moya/blob/master/docs/Targets.md#escaping-urls
-extension String {
-    var URLEscapedString: String {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!
     }
 }
